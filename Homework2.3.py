@@ -72,7 +72,7 @@ is_big = x >= 3000
 
 x = my_poem[-1]
 print(x)
-my_list = [2, 3, 4, 5, 6, ]
+my_list = [2, 3, 4, 5, 6]
 
 # reformat кода
 
@@ -135,8 +135,8 @@ if c > 0:
 
 # автоматическое переименование в PyCharm и подсказки - вам не нужно набирать длинные названия переменных
 
-ss = ['cat', 'wolf', 'ostrich']
-if 'lion' in ss:
+pets = ['cat', 'wolf', 'ostrich']
+if 'lion' in pets:
     print('Wow!')
 
 # В каждой уважающей себя компании есть style guide (стайл-гайд) - руководство по стилю написания кода.
