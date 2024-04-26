@@ -4,8 +4,10 @@ class Building:
         self.buildingType = ''
 
     def __eq__(self, other):
-        return self.numberOfFloors == self.buildingType
+        return self.numberOfFloors == other.numberOfFloors and self.buildingType == other.buildingType
 
 
 my_building = Building()
-my_building.__eq__(0)
+my_building_2 = Building()
+if Building.__eq__(my_building, my_building_2):
+    print('Здания идентичны')
