@@ -20,13 +20,13 @@ class BankAcc:
 def deposit_task(account, amount):
     for _ in range(10):
         account.deposit(amount)
-        print(account.balance)
+        print(f'Получено {amount} на счет, на счету {account.balance}')
 
 
 def withdraw_task(account, amount):
     for _ in range(10):
         account.withdraw(amount)
-        print(account.balance)
+        print(f'Снято {amount} со счета, на счету {account.balance}')
 
 
 lock_ = threading.Lock()
