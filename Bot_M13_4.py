@@ -46,6 +46,7 @@ async def send_calories(message, state):
     data = await state.get_data()
     ccal = (int(data["age"]) * 5) + (int(data["weight"]) * 10) + (int(data["growth"]) * 6.25) + 5
     await message.answer(f'Ваша расчетное потребление калорий:{ccal}')
+    await state.finish()
 
 
 if __name__ == '__main__':
