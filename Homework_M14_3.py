@@ -9,22 +9,31 @@ import asyncio
 api = ''
 bot = Bot(token=api)
 dp = Dispatcher(bot=bot, storage=MemoryStorage())
-kb = ReplyKeyboardMarkup(resize_keyboard=True)
-buttonInf = KeyboardButton(text='Информация')
-buttonCal = KeyboardButton(text='Рассчитать')
-buttonBuy = KeyboardButton(text='Купить')
-kb.row(buttonCal, buttonInf)
-kb.add(buttonBuy)
-ib = InlineKeyboardMarkup()
-iButtonCal = InlineKeyboardButton(text='Рассчитать норму калорий', callback_data='calories')
-iButtonInf = InlineKeyboardButton(text='Формулы расчёта', callback_data='formulas')
-ib.row(iButtonCal, iButtonInf)
+kb = ReplyKeyboardMarkup(
+    keyboard=[
+        [
+            KeyboardButton(text='Информация'),
+            KeyboardButton(text='Рассчитать')
+        ],
+        [KeyboardButton(text='Купить')]
+    ]
+)
+ib = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [
+            InlineKeyboardButton(text='Рассчитать норму калорий', callback_data='calories'),
+            InlineKeyboardButton(text='Формулы расчёта', callback_data='formulas')
+        ]
+    ]
+)
 iBuyB = InlineKeyboardMarkup(
     inline_keyboard=[
-        [InlineKeyboardButton(text='Витамин A', callback_data='product_buying')],
-        [InlineKeyboardButton(text='Витамин B6', callback_data='product_buying')],
-        [InlineKeyboardButton(text='Витамин C', callback_data='product_buying')],
-        [InlineKeyboardButton(text='Витамин D3', callback_data='product_buying')]
+        [
+            InlineKeyboardButton(text='Витамин A', callback_data='product_buying'),
+            InlineKeyboardButton(text='Витамин B6', callback_data='product_buying'),
+            InlineKeyboardButton(text='Витамин C', callback_data='product_buying'),
+            InlineKeyboardButton(text='Витамин D3', callback_data='product_buying')
+        ]
     ]
 )
 
@@ -53,17 +62,13 @@ async def get_formulas(call):
 @dp.message_handler(text='Купить')
 async def get_buying_list(message):
     with open('A.png', "rb") as img:
-        await message.answer_photo(img,
-                                   'Витамин А является одним из важнейших витаминов в нашем организме. Цена 100 руб.')
+        await message.answer_photo(img, 'Витамин А || Витамин А является одним из важнейших витаминов в нашем организме || Цена 100 руб.')
     with open('B.png', "rb") as img:
-        await message.answer_photo(img,
-                                   'Витамин В6 (пиридоксин) участвует во многих биохимических реакциях, необходимых для поддержания жизни. Цена 200 руб.')
+        await message.answer_photo(img, 'Витамин B6 || Витамин В6 (пиридоксин) участвует во многих биохимических реакциях, необходимых для поддержания жизни || Цена 200 руб.')
     with open('C.png', "rb") as img:
-        await message.answer_photo(img,
-                                   'Витамин C — это незаменимое питательное вещество, имеющее огромное значение для работы иммунной системы. Цена 300 руб.')
+        await message.answer_photo(img, 'Витамин C || Витамин C — это незаменимое питательное вещество, имеющее огромное значение для работы иммунной системы || Цена 300 руб.')
     with open('D3.png', "rb") as img:
-        await message.answer_photo(img,
-                                   'Витамин D3 — необходим для правильной работы иммунной, нервной, гармональной и кровеносной систем человека, он участвует в метаболизме кальция и фосфора. Цена 400 руб.')
+        await message.answer_photo(img, 'Витамин D3 || Витамин D3 — необходим для правильной работы иммунной, нервной, гармональной и кровеносной систем человека, он участвует в метаболизме кальция и фосфора || Цена 400 руб.')
     await message.answer('Выберите продукт для покупки:', reply_markup=iBuyB)
 
 
