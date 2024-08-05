@@ -16,7 +16,7 @@ kb = ReplyKeyboardMarkup(
             KeyboardButton(text='Рассчитать')
         ],
         [KeyboardButton(text='Купить')]
-    ]
+    ], resize_keyboard=True
 )
 ib = InlineKeyboardMarkup(
     inline_keyboard=[
