@@ -45,12 +45,12 @@ def add_users(username, email, age):
 
 
 def is_included(username):
-    if cursor.execute('SELECT * FROM Users WHERE username=?', (username,)).fetchone() is None:
+    if cursor.execute('SELECT * FROM Users WHERE username=?', (username,)).fetchone()[0] is None:
         initiate_db.commit()
-        return 0
+        return False
     else:
         initiate_db.commit()
-        return 1
+        return True
 
 
 print(is_included('Turin1'))
