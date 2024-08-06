@@ -126,9 +126,15 @@ async def sing_up(message):
     await RegistrationState.username.set()
 
 
+@dp.message_handler(text='Регистрация')
+async def sing_up(message):
+    await message.answer('Введите имя пользователя (только латинский алфавит):')
+    await RegistrationState.username.set()
+
+
 @dp.message_handler(state=RegistrationState.username)
 async def set_username(message, state):
-    if is_included(str(message)) == '1':
+    if is_included(message) is True:
         await message.answer('Пользователь существует, введите другое имя')
         await RegistrationState.username.set()
 
