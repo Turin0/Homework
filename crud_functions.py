@@ -1,16 +1,20 @@
 import sqlite3
 
-initiate_db = sqlite3.connect('database.db')
-cursor = initiate_db.cursor()
+connect = sqlite3.connect('database.db')
+cursor = connect.cursor()
 
-cursor.execute('''
-CREATE TABLE IF NOT EXISTS Products(
-id INTEGER PRIMARY KEY,
-title TEXT NOT NULL,
-description TEXT,
-price INTEGER NOT NULL
-)
-''')
+
+def initiate_db():
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS Products(
+    id INTEGER PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT,
+    price INTEGER NOT NULL
+    )
+    ''')
+
+
 cursor.execute('CREATE INDEX IF NOT EXISTS idx_email ON Products (title)')
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS Users(
@@ -41,19 +45,21 @@ def get_all_products():
 def add_users(username, email, age):
     cursor.execute('INSERT INTO Users(username, email, age, balance) VALUES(?,?,?,?)',
                    (username, email, age, '1000'))
-    initiate_db.commit()
+    connect.commit()
 
 
 def is_included(username):
     if cursor.execute('SELECT * FROM Users WHERE username=?', (username,)).fetchone()[0] is None:
-        initiate_db.commit()
-        return False
+        connect.commit()
+        return '0'
     else:
-        initiate_db.commit()
-        return True
+        connect.commit()
+        return '1'
 
 
 print(is_included('Turin1'))
 
-initiate_db.commit()
+connect.commit()
 
+if __name__ == '__main__':
+     #initiate_db()
