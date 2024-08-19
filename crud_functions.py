@@ -25,6 +25,8 @@ age INTEGER NOT NULL,
 balance INTEGER NOT NULL
 )
 ''')
+
+
 # cursor.execute('INSERT INTO Products(title, description, price) VALUES(?,?,?)',
 #                ('Витамин A', 'Является одним из важнейших витаминов в нашем организме.', '100'))
 # cursor.execute('INSERT INTO Products (title, description, price) VALUES(?,?,?)',
@@ -49,17 +51,15 @@ def add_users(username, email, age):
 
 
 def is_included(username):
-    if cursor.execute('SELECT * FROM Users WHERE username=?', (username,)).fetchone()[0] is None:
-        connect.commit()
-        return '0'
+    check_users = cursor.execute('SELECT * FROM Users WHERE username=?', (username,)).fetchone()
+    if check_users is None:
+        check_users = False
     else:
-        connect.commit()
-        return '1'
+        check_users = True
+    return check_users
 
-
-print(is_included('Turin1'))
 
 connect.commit()
 
 if __name__ == '__main__':
-     #initiate_db()
+    initiate_db()
