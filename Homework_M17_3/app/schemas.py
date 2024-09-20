@@ -21,3 +21,4 @@ class CreateTask(BaseModel):
 
 
 class UpdateTask(CreateTask)
+    pass
